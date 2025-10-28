@@ -1,53 +1,46 @@
 'use client'
-import { useState } from "react";
-import { Usuario } from "../Modelos/Usuarios"
-import UsuarioComponente from "@/Componentes/UsuarioComponente";
+import { useEffect, useState } from "react";
+import { Idioma } from "../Modelos/Idioma"
+import Lista_Idioma from "../Componentes/Lista_Idioma";
 
 
 export default function Home() {
 
-  const [ lista_Usuario, setListaUsuario ]= useState<Usuario[]>([]);
+  const [listaIdiomas]= useState<Idioma[]>([
+          { "idiomaEspañol": "Interfaz de Programación de Aplicaciones", "idiomaIngles": "Application Programming Interface" },
+          { "idiomaEspañol": "MARCO DE TRABAJO", "idiomaIngles": "Framework" },
+          { "idiomaEspañol": "Lenguaje de Consulta Estructurada", "idiomaIngles": "STRUCTURE SEQUENCE LANGUAGE" },
+          { "idiomaEspañol": "Notación de Objetos de JavaScript", "idiomaIngles": "JavaScript Object Notation" },
+          { "idiomaEspañol": "Token Web en Notación de Objetos de JavaScript", "idiomaIngles": "(JSON Web Token" },
+          { "idiomaEspañol": "Lenguaje de Definición de Datos", "idiomaIngles": "Data Definition Language" },
+          { "idiomaEspañol": "Lenguaje de Manipulación de Datos", "idiomaIngles": "Data Manipulation Language" },
+          { "idiomaEspañol": "EQUIPO LOCAL", "idiomaIngles": "LOCALHOST" },
+          { "idiomaEspañol": "INTERFAZ DE USUARIO", "idiomaIngles": "USER INTERFACE" },
+          { "idiomaEspañol": "EXPERIENCIA DE USUARIO", "idiomaIngles": "USER EXPERIENCE" }
+  ]);
 
-  const [nombre, setNombre] = useState<string>('');
-  const [correo, setCorreo] = useState<string>(''); 
+  const [IdiomaActual, setIdiomaActual] = useState< 'es' | 'en'>('es');
+  const [listaMostrada, setListaMostrada] = useState<string[]>([]);
 
-
-  function agregarUsuario():void{
-        
-      const nuevoUsuario:Usuario={
-          id:lista_Usuario.length+1,
-          nombre:nombre,
-          correo:correo
-        };
-
-        setListaUsuario([... lista_Usuario,nuevoUsuario]);
-
-        alert('Usuario Agregado')
-  }
-
+  useEffect(() =>{
+    if (IdiomaActual ==='es') {
+      setListaMostrada(listaIdiomas.map(p => p.idiomaEspañol));
+    }
+    else {
+      setListaMostrada(listaIdiomas.map(p => p.idiomaIngles));
+    }
+  }, [IdiomaActual,listaIdiomas]);
   
 
-  return (
-    <div className="container mx-auto max-w-3xl p-6 bg-emerald-200 rounded">
-        <h1 className="text-black text-4xl m-4">Practicas con Next.js</h1>
+  return (  
+    <div className="container mx-auto max-w-2xl p-6 bg-emerald-200 rounded">
+        <h1 className="text-black text-4xl m-4">Lista de Palabras</h1>
+
+        <Lista_Idioma palabras={listaMostrada} />
 
         <div className="container mx-auto max-w-2xl">
-
-            <form className="align-baseline justify-baseline">
-
-              <label className="text-black text-lg">Nombre:</label> <br />
-              <input type="text"  className="text-black text-lg w-75  border-2 rounded-lg"  placeholder="Ingrese su nombre" value={nombre} onChange={(e)=>setNombre(e.target.value)}/> <br />
-
-              <label className="text-black text-lg">Correo Electronico:</label> <br />
-              <input type="email" className="text-black text-lg w-75 border-2 rounded-lg"  placeholder="Ingrese su correo electronico" value={correo} onChange={(e)=>setCorreo(e.target.value)}/> <br />
-
-
-              <button type="button"  onClick={agregarUsuario}  className="rounded m-4 p-4 text-white bg-emerald-800 cursor-pointer">Guardar Informacion</button>
-
-            </form>
-
-        <UsuarioComponente lista_usuarios={lista_Usuario}></UsuarioComponente>
-
+            <button type="button" onClick={() => setIdiomaActual('es')} className="bg-green-400 m-4 w-xs rounded-2xl text-black cursor-pointer">Cambiar Idioma Español</button>          
+            <button type="button" onClick={() => setIdiomaActual('en')} className="bg-blue-400 m-4 w-xs rounded-2xl text-black cursor-pointer">Cambiar Idioma Ingles</button>
         </div>
     </div>
   );
