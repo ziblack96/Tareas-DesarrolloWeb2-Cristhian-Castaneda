@@ -9,9 +9,9 @@ export default function Home() {
   const [listaIdiomas]= useState<Idioma[]>([
           { "idiomaEspañol": "Interfaz de Programación de Aplicaciones", "idiomaIngles": "Application Programming Interface" },
           { "idiomaEspañol": "MARCO DE TRABAJO", "idiomaIngles": "Framework" },
-          { "idiomaEspañol": "Lenguaje de Consulta Estructurada", "idiomaIngles": "STRUCTURE SEQUENCE LANGUAGE" },
+          { "idiomaEspañol": "Lenguaje de Consulta Estructurada", "idiomaIngles": "Structured Query Language" },
           { "idiomaEspañol": "Notación de Objetos de JavaScript", "idiomaIngles": "JavaScript Object Notation" },
-          { "idiomaEspañol": "Token Web en Notación de Objetos de JavaScript", "idiomaIngles": "(JSON Web Token" },
+          { "idiomaEspañol": "Token Web en Notación de Objetos de JavaScript", "idiomaIngles": "JSON Web Token" },
           { "idiomaEspañol": "Lenguaje de Definición de Datos", "idiomaIngles": "Data Definition Language" },
           { "idiomaEspañol": "Lenguaje de Manipulación de Datos", "idiomaIngles": "Data Manipulation Language" },
           { "idiomaEspañol": "EQUIPO LOCAL", "idiomaIngles": "LOCALHOST" },
